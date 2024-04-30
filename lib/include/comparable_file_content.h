@@ -47,7 +47,7 @@ namespace bayan
         bool try_get_next_hash(std::string& next_hash);
 
         /**
-         * @brief get_total_hash retrieves hash ffrom whole already read content.
+         * @brief get_total_hash retrieves hash from whole already read content.
          *
          * @return hashed string.
          */
