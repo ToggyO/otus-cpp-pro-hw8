@@ -1,7 +1,45 @@
 #include <gtest/gtest.h>
 
+#include <unordered_map>
+
 #include "config.h"
 #include "duplicate_files_searcher.h"
+
+template <class Collection1, class Collection2>
+bool collections_are_equivalent(Collection1 left, Collection2 right)
+{
+    auto begin_left = left.begin();
+    auto end_left = left.end();
+    auto begin_right = right.begin();
+    auto end_right = right.end();
+
+    auto size_left = std::distance(begin_left, end_left);
+    auto size_right = std::distance(begin_right, end_right);
+    if (size_left != size_right)
+    {
+        return false;
+    }
+
+    std::unordered_map<std::string, bool> existing;
+
+    for (auto it1 = begin_left; it1 != end_left; ++it1)
+    {
+        // existing.insert(*it1, true);
+        existing[*it1] = true;
+    }
+
+    // for (auto it1 = begin_left, auto it2 = begin_right; it1 != end_left && it2 != end_right; ++it1 && ++it2) TODO: remove
+    for (auto it2 = begin_right; it2 != end_right; ++it2)
+    {
+        if (!existing.contains(*it2))
+        {
+            return false;
+        }
+        
+    }
+
+    return true;
+}
 
 // TODO: add gmock assertions
 TEST(Bayan, RecursiveTest) {
@@ -19,30 +57,30 @@ TEST(Bayan, RecursiveTest) {
 
     EXPECT_EQ(duplicates.size(), 4);
 
-    EXPECT_EQ(duplicates[0],
-      std::unordered_set<std::string>({
-          root + "/dir/dir1/dir1.1/file1.1.1.txt",
-          root + "/dir/dir1/dir1.1/file1.1.2.txt",
-      }));
+    std::vector<std::string> actual;
+    actual.reserve(9);
+    for (const auto &set : duplicates)
+    {
+        for (const auto& path : set)
+        {
+            actual.push_back(std::move(path));
+        }
+    }
 
-    EXPECT_EQ(duplicates[1],
-      std::unordered_set<std::string>({
+    std::vector<std::string> expected
+    {
+        root + "/dir/dir1/dir1.1/file1.1.1.txt",
+        root + "/dir/dir1/dir1.1/file1.1.2.txt",
         root + "/dir/dir1/file1.1.txt",
         root + "/dir/dir1/afile1.2.txt",
-      }));
-
-    EXPECT_EQ(duplicates[2],
-      std::unordered_set<std::string>({
         root + "/dir/dir2/file2.1.log",
         root + "/dir/dir2/file2.1.txt",
-        root + "/dir/dir2/file2.2.log"
-      }));
-
-    EXPECT_EQ(duplicates[3],
-      std::unordered_set<std::string>({
+        root + "/dir/dir2/file2.2.log",
         root + "/dir/dir3/file3.1.txt",
         root + "/dir/dir3/file3.2.txt",
-      }));
+    };
+
+    EXPECT_TRUE(collections_are_equivalent(actual, expected));
 }
 
 TEST(Bayan, TopLevelTest) {

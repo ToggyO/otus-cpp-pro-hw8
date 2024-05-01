@@ -32,7 +32,7 @@ jobs:
       - run: cmake --build ./build
 
       - name: Run tests
-        run: cd ./build/tests && ctest && cat /home/runner/work/otus-cpp-pro-hw8/otus-cpp-pro-hw8/build/tests/Testing/Temporary/LastTest.log
+        run: cd ./build/tests && ctest
 
       - run: cmake --build ./build --target package
 
