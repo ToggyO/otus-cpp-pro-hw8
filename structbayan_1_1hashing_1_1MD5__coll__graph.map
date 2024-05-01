@@ -1,0 +1,4 @@
+<map id="bayan::hashing::MD5" name="bayan::hashing::MD5">
+<area shape="rect" id="node1" title="The MD5 hash algorithm." alt="" coords="9,80,149,107"/>
+<area shape="rect" id="node2" href="$structbayan_1_1hashing_1_1IHash.html" title="Interface represents functionality to get hash from input string." alt="" coords="5,5,153,32"/>
+</map>

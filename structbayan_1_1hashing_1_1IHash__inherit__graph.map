@@ -1,0 +1,5 @@
+<map id="bayan::hashing::IHash" name="bayan::hashing::IHash">
+<area shape="rect" id="node1" title="Interface represents functionality to get hash from input string." alt="" coords="94,5,242,32"/>
+<area shape="rect" id="node2" href="$structbayan_1_1hashing_1_1CRC32.html" title="The CRC32 hash algorithm." alt="" coords="5,80,160,107"/>
+<area shape="rect" id="node3" href="$structbayan_1_1hashing_1_1MD5.html" title="The MD5 hash algorithm." alt="" coords="185,80,325,107"/>
+</map>
