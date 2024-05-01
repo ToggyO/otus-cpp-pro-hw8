@@ -25,7 +25,7 @@ jobs:
         run: wget https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.gz
 
       - name: Configure Boost
-        run: sudo su && mkdir boost-ver && cd boost-ver && tar -xzf ../boost_*.tar.gz && cd boost_*/ && ./bootstrap.sh && ./b2 install --prefix=/usr/local --with-filesystem --with-program_options
+        run: mkdir boost-ver && cd boost-ver && tar -xzf boost_*.tar.gz && cd boost_*/ && sudo ./bootstrap.sh && sudo ./b2 install --prefix=/usr/local --with-filesystem --with-program_options
 
       - run: cmake -B ./build -DPATCH_VERSION=${{ github.run_number }}
 
