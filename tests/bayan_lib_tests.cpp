@@ -24,18 +24,15 @@ bool collections_are_equivalent(Collection1 left, Collection2 right)
 
     for (auto it1 = begin_left; it1 != end_left; ++it1)
     {
-        // existing.insert(*it1, true);
         existing[*it1] = true;
     }
 
-    // for (auto it1 = begin_left, auto it2 = begin_right; it1 != end_left && it2 != end_right; ++it1 && ++it2) TODO: remove
     for (auto it2 = begin_right; it2 != end_right; ++it2)
     {
         if (!existing.contains(*it2))
         {
             return false;
         }
-        
     }
 
     return true;
