@@ -18,6 +18,15 @@ jobs:
       - name: Install GTest
         run: sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && sudo cp lib/*.a /usr/lib && sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
 
+      - name: Install Boost SDK
+        run: sudo apt install libboost-all-dev
+
+      - name: Dowload Boost
+        run: wget https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.gz
+
+      - name: Configure Boost
+        run:  mkdir boost-ver && cd boost-ver && tar -xzf boost_*.tar.gz && cd boost_*/ && ./bootstrap.sh && ./b2 install --prefix=/usr/local --with-filesystem --with-program_options
+
       - run: cmake -B ./build -DPATCH_VERSION=${{ github.run_number }}
 
       - run: cmake --build ./build
